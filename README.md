@@ -1,40 +1,123 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Employee Voting App
 
-## Getting Started
+Employee Voting App is a single-page application (SPA) built with Next.js, Apollo Client, and Apollo Server. It allows users to vote for their favorite employee. The votes are stored in-memory and the app supports voting for multiple employees with real-time updates.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- List all employees with their details and a voting button
+- Vote for an employee
+- View detailed information about each employee
+- Real-time updates for votes
+- Single Page Application (SPA) with client-side navigation
+- Server-Side Rendering (SSR) with Next.js
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
+- [GraphQL](https://graphql.org/)
+- [Styled Components](https://styled-components.com/)
+- [UUID](https://github.com/uuidjs/uuid)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Installation
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. **Clone the repository:**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    ```bash
+    git clone https://github.com/your-username/employee-voting-app.git
+    cd employee-voting-app
+    ```
 
-## Learn More
+2. **Install dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Run the Apollo Server:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    npm run server
+    ```
 
-## Deploy on Vercel
+4. **Run the Next.js development server:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm run dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. **Open your browser and visit:**
+
+    ```plaintext
+    http://localhost:3000
+    ```
+
+## GraphQL Endpoints
+
+- **Query Employees:**
+
+    ```graphql
+    query GetEmployees {
+      employees {
+        id
+        firstName
+        lastName
+        role
+        votes
+        imageUrl
+      }
+    }
+    ```
+
+- **Query Employee by ID:**
+
+    ```graphql
+    query GetEmployee($id: ID!) {
+      employee(id: $id) {
+        id
+        firstName
+        lastName
+        role
+        email
+        address
+        phone
+        imageUrl
+      }
+    }
+    ```
+
+- **Vote for Employee:**
+
+    ```graphql
+    mutation VoteEmployee($id: ID!) {
+      voteEmployee(id: $id) {
+        id
+        votes
+      }
+    }
+    ```
+
+## Project Structure
+
+```plaintext
+employee-voting-app/
+├── public/
+│   └── ...
+├── src/
+│   ├── components/
+│   │   └── ...
+│   ├── lib/
+│   │   └── apolloClient.ts
+│   ├── pages/
+│   │   ├── employee/
+│   │   │   └── [id].tsx
+│   │   ├── _app.tsx
+│   │   └── index.tsx
+│   └── styles/
+│       └── globals.css
+├── server.ts
+├── package.json
+├── tsconfig.json
+└── README.md
